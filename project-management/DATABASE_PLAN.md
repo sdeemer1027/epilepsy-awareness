@@ -259,3 +259,164 @@ This document works together with:
 | Version | Description |
 |----------|-------------|
 | v0.2.0-alpha | Initial database architecture created. |
+
+---
+
+# Module 1 – Security & Identity
+
+## Overview
+
+This module is responsible for authentication, authorization, identity management, and auditing.
+
+It provides the foundation for every other module in the platform.
+
+No other module may exist without this one.
+
+---
+
+# Table: users
+
+## Purpose
+
+Stores authentication credentials and basic account information.
+
+Medical, profile, and contact information will not be stored here. Those belong in the `profiles` table.
+
+### Planned Columns
+
+| Column | Type | Required | Notes |
+|---------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| role_id | bigint | Yes | Foreign key to roles |
+| name | string(255) | Yes | Display name |
+| email | string(255) | Yes | Unique |
+| email_verified_at | timestamp | No | Laravel default |
+| password | string | Yes | Hashed password |
+| remember_token | string | No | Laravel default |
+| is_active | boolean | Yes | Default true |
+| last_login_at | timestamp | No | Last successful login |
+| created_at | timestamp | Yes | Laravel default |
+| updated_at | timestamp | Yes | Laravel default |
+
+### Relationships
+
+- belongsTo Role
+- hasOne Profile
+- hasMany Audit Logs
+- hasMany Notifications
+
+### Notes
+
+The `users` table should remain focused on authentication and account status.
+
+---
+
+# Table: roles
+
+## Purpose
+
+Defines user roles used by the Role-Based Access Control (RBAC) system.
+
+### Planned Columns
+
+| Column | Type | Required | Notes |
+|---------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | Display name |
+| slug | string | Yes | Unique |
+| description | text | No | Role description |
+| created_at | timestamp | Yes | Laravel default |
+| updated_at | timestamp | Yes | Laravel default |
+
+### Relationships
+
+- hasMany Users
+- belongsToMany Permissions
+
+---
+
+# Table: permissions
+
+## Purpose
+
+Defines individual permissions that may be assigned to roles.
+
+### Example Permissions
+
+- manage_users
+- manage_articles
+- manage_events
+- moderate_forums
+- manage_settings
+- edit_profile
+- view_reports
+
+### Relationships
+
+- belongsToMany Roles
+
+---
+
+# Table: role_permissions
+
+## Purpose
+
+Pivot table connecting roles to permissions.
+
+### Relationships
+
+- belongsTo Role
+- belongsTo Permission
+
+---
+
+# Table: user_permissions
+
+## Purpose
+
+Reserved for future permission overrides on individual users.
+
+This table will not be implemented in Version 1.0 but is included in the blueprint for future expansion.
+
+---
+
+# Table: audit_logs
+
+## Purpose
+
+Records important system activity for security and troubleshooting.
+
+### Example Events
+
+- User login
+- User logout
+- Password reset
+- Profile update
+- Role assignment
+- Permission change
+- Content deletion
+
+### Planned Columns
+
+| Column | Type | Notes |
+|---------|------|-------|
+| id | bigint | Primary Key |
+| user_id | bigint | Nullable if system event |
+| event | string | Event identifier |
+| description | text | Human-readable summary |
+| ip_address | string | IPv4/IPv6 |
+| user_agent | text | Browser/device information |
+| created_at | timestamp | Event timestamp |
+
+### Relationships
+
+- belongsTo User
+
+---
+
+# Module Status
+
+**Status:** Draft
+
+Implementation will begin only after the module has been reviewed and approved.
+
