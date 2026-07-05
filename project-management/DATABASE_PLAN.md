@@ -420,3 +420,227 @@ Records important system activity for security and troubleshooting.
 
 Implementation will begin only after the module has been reviewed and approved.
 
+---
+
+# Module 2 – Member Domain
+
+## Overview
+
+The Member Domain manages personal, non-authentication information for users of the platform.
+
+This includes:
+
+- Personal profile data
+- Emergency contacts
+- Caregiver relationships
+- Physician relationships
+
+This module is separate from authentication to ensure clean separation between identity and personal/medical data.
+
+---
+
+# Table: profiles
+
+## Purpose
+
+Stores personal information for each user.
+
+This table extends the `users` table with demographic and optional health-related metadata.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| first_name | string | Yes | |
+| last_name | string | Yes | |
+| date_of_birth | date | No | |
+| phone_number | string | No | |
+| address_line_1 | string | No | |
+| address_line_2 | string | No | |
+| city | string | No | |
+| state_province | string | No | |
+| postal_code | string | No | |
+| country | string | No | |
+| preferred_language | string | No | Default en |
+| emergency_contact_name | string | No | Quick access field |
+| emergency_contact_phone | string | No | Quick access field |
+| avatar | string | No | Profile image path |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User
+- hasMany Emergency Contacts
+- hasMany Caregiver Links
+- hasMany Physician Links
+
+---
+
+## Notes
+
+Address fields are stored directly in this table for simplicity at this stage.
+
+Future versions may normalize addresses into a separate table if needed.
+
+---
+
+# Table: emergency_contacts
+
+## Purpose
+
+Stores emergency contact information for a member.
+
+A member may have multiple emergency contacts.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| name | string | Yes | Contact name |
+| relationship | string | No | e.g. Parent, Spouse |
+| phone_primary | string | Yes | |
+| phone_secondary | string | No | |
+| email | string | No | |
+| priority | integer | No | Lower = higher priority |
+| is_primary | boolean | Yes | Default false |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User
+
+---
+
+# Table: caregivers
+
+## Purpose
+
+Stores caregiver accounts linked to members.
+
+Caregivers may assist one or multiple members.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users (caregiver) |
+| notes | text | No | Optional caregiver notes |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User
+- belongsToMany Users (members via pivot)
+
+---
+
+# Table: member_caregivers
+
+## Purpose
+
+Pivot table linking members to caregivers.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| member_id | bigint | Yes | FK → users |
+| caregiver_id | bigint | Yes | FK → users |
+| relationship_type | string | No | e.g. Parent, Friend |
+| permissions | json | No | Future granular access control |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (member)
+- belongsTo User (caregiver)
+
+---
+
+# Table: physicians
+
+## Purpose
+
+Stores healthcare professional accounts linked to members.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | |
+| specialty | string | No | Neurologist, GP, etc |
+| phone | string | No | |
+| email | string | No | |
+| clinic_name | string | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsToMany Users (members via pivot)
+
+---
+
+# Table: member_physicians
+
+## Purpose
+
+Links members to physicians.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| member_id | bigint | Yes | FK → users |
+| physician_id | bigint | Yes | FK → physicians |
+| primary | boolean | No | Indicates main doctor |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User
+- belongsTo Physician
+
+---
+
+# Module Status
+
+**Status:** Draft
+
+This module will be reviewed before migration creation begins.
+
