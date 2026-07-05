@@ -644,3 +644,268 @@ Links members to physicians.
 
 This module will be reviewed before migration creation begins.
 
+---
+
+# Module 3 – Medical Domain
+
+## Overview
+
+The Medical Domain manages all health-related tracking for users living with epilepsy.
+
+This includes seizure tracking, medication management, appointments, diagnoses, triggers, allergies, and supporting medical documentation.
+
+This module is designed to support personal health management and communication with caregivers and healthcare professionals.
+
+It is NOT a replacement for a hospital Electronic Health Record (EHR) system.
+
+---
+
+# Table: seizures
+
+## Purpose
+
+Stores recorded seizure events for a user.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| seizure_type_id | bigint | No | FK → seizure_types |
+| start_time | timestamp | Yes | |
+| end_time | timestamp | No | |
+| duration_seconds | integer | No | Calculated or stored |
+| location | string | No | Where event occurred |
+| trigger_id | bigint | No | FK → seizure_triggers |
+| notes | text | No | User notes |
+| severity | integer | No | Scale 1–10 |
+| was_witnessed | boolean | Yes | Default false |
+| witnessed_by | string | No | |
+| postictal_state | text | No | Recovery description |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User
+- belongsTo Seizure Type
+- belongsTo Seizure Trigger
+- hasMany Seizure Medications (if administered during event)
+
+---
+
+# Table: seizure_types
+
+## Purpose
+
+Defines categories of seizures.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | e.g. Focal, Generalized |
+| description | text | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: seizure_triggers
+
+## Purpose
+
+Stores known or user-defined seizure triggers.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | e.g. Stress, Sleep deprivation |
+| description | text | No | |
+| is_common | boolean | Yes | Default false |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: medications
+
+## Purpose
+
+Stores medication definitions available to users.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | Medication name |
+| generic_name | string | No | |
+| dosage_form | string | No | Tablet, Liquid, etc |
+| strength | string | No | e.g. 500mg |
+| description | text | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: medication_logs
+
+## Purpose
+
+Tracks medication intake events for users.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| medication_id | bigint | Yes | FK → medications |
+| dosage | string | No | Actual dose taken |
+| taken_at | timestamp | Yes | |
+| scheduled_at | timestamp | No | Planned time |
+| status | string | Yes | taken, missed, skipped |
+| notes | text | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: seizure_medications
+
+## Purpose
+
+Tracks medication administered during or after a seizure event.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| seizure_id | bigint | Yes | FK → seizures |
+| medication_id | bigint | Yes | FK → medications |
+| dosage | string | No | |
+| administered_by | string | No | Caregiver or paramedic |
+| notes | text | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: allergies
+
+## Purpose
+
+Stores user allergy information.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| allergen | string | Yes | Substance name |
+| reaction | text | No | Description |
+| severity | string | No | mild, moderate, severe |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: diagnoses
+
+## Purpose
+
+Stores medical diagnoses for users.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| condition | string | Yes | e.g. Epilepsy |
+| diagnosed_at | date | No | |
+| notes | text | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: appointments
+
+## Purpose
+
+Stores medical appointments.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| physician_id | bigint | No | FK → physicians |
+| title | string | Yes | |
+| description | text | No | |
+| scheduled_at | timestamp | Yes | |
+| location | string | No | |
+| status | string | Yes | scheduled, completed, cancelled |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: medical_documents
+
+## Purpose
+
+Stores uploaded medical files.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| title | string | Yes | |
+| file_path | string | Yes | Storage path |
+| file_type | string | No | PDF, image, etc |
+| description | text | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Module Status
+
+**Status:** Draft
+
+This module will be reviewed carefully before migration creation due to its complexity and importance.
+
