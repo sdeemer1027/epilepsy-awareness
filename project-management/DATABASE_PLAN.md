@@ -909,3 +909,245 @@ Stores uploaded medical files.
 
 This module will be reviewed carefully before migration creation due to its complexity and importance.
 
+---
+
+# Module 4 – Content Management Domain
+
+## Overview
+
+The Content Management Domain handles all public-facing and administrative content within the platform.
+
+This includes informational pages, articles, categories, tags, media uploads, downloads, and frequently asked questions.
+
+This module powers the public website and future CMS functionality.
+
+---
+
+# Table: pages
+
+## Purpose
+
+Stores static or semi-static website pages such as About, Privacy Policy, and Terms of Service.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| title | string | Yes | Page title |
+| slug | string | Yes | URL identifier |
+| content | longText | Yes | Page HTML/Markdown content |
+| status | string | Yes | draft, published |
+| published_at | timestamp | No | |
+| created_by | bigint | No | FK → users |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (creator)
+
+---
+
+# Table: articles
+
+## Purpose
+
+Stores blog-style or informational articles.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| title | string | Yes | |
+| slug | string | Yes | |
+| excerpt | text | No | Short summary |
+| content | longText | Yes | Full article |
+| category_id | bigint | No | FK → categories |
+| status | string | Yes | draft, published |
+| published_at | timestamp | No | |
+| author_id | bigint | Yes | FK → users |
+| views | integer | No | Default 0 |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (author)
+- belongsTo Category
+- belongsToMany Tags
+
+---
+
+# Table: categories
+
+## Purpose
+
+Groups articles and other content into logical sections.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | |
+| slug | string | Yes | |
+| description | text | No | |
+| type | string | No | article, page, event |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- hasMany Articles
+
+---
+
+# Table: tags
+
+## Purpose
+
+Provides flexible labeling for articles and other content.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | |
+| slug | string | Yes | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsToMany Articles
+
+---
+
+# Table: article_tag
+
+## Purpose
+
+Pivot table linking articles and tags.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| article_id | bigint | Yes | FK → articles |
+| tag_id | bigint | Yes | FK → tags |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: media
+
+## Purpose
+
+Stores uploaded files such as images, documents, and attachments.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| user_id | bigint | Yes | FK → users |
+| file_name | string | Yes | Original file name |
+| file_path | string | Yes | Storage location |
+| file_type | string | No | image, pdf, video |
+| mime_type | string | No | |
+| size | integer | No | File size in bytes |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User
+
+---
+
+# Table: downloads
+
+## Purpose
+
+Stores downloadable resources such as PDFs, guides, and educational material.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| title | string | Yes | |
+| description | text | No | |
+| file_path | string | Yes | |
+| file_type | string | No | |
+| category_id | bigint | No | FK → categories |
+| created_by | bigint | No | FK → users |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (creator)
+- belongsTo Category
+
+---
+
+# Table: faqs
+
+## Purpose
+
+Stores frequently asked questions for the public website.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| question | string | Yes | |
+| answer | text | Yes | |
+| category | string | No | optional grouping |
+| order | integer | No | display order |
+| is_published | boolean | Yes | Default true |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Module Status
+
+**Status:** Draft
+
+This module will be reviewed before implementation begins.
+
