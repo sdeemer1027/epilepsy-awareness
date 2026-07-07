@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $date_of_birth
  * @property-read User $user
  */
-class Profile extends BaseModel
+class MemberProfile extends BaseModel
 {
     protected $table = 'profiles';
 
