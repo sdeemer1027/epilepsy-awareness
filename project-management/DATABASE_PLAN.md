@@ -1559,3 +1559,220 @@ Future versions may support:
 
 The Events Domain will be implemented after the Community Domain has been completed and approved.
 
+---
+
+# Module 7 – Administration Domain
+
+## Overview
+
+The Administration Domain provides the operational tools required to manage, monitor, and maintain the Epilepsy Support Platform (ESP).
+
+These tables support system configuration, auditing, user feedback, announcements, and operational monitoring. They are intended for administrative users and system processes.
+
+---
+
+# Table: settings
+
+## Purpose
+
+Stores configurable system settings that can be managed without modifying application code.
+
+Examples include:
+
+- Site name
+- Organization information
+- Email configuration
+- Registration settings
+- Feature toggles
+- Maintenance mode
+- Theme options
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| key | string | Yes | Unique configuration key |
+| value | longText | No | Stored value |
+| data_type | string | Yes | string, boolean, integer, json |
+| category | string | No | General grouping |
+| description | text | No | Administrator notes |
+| updated_by_user_id | bigint | No | FK → users |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (updated by)
+
+---
+
+# Table: contact_messages
+
+## Purpose
+
+Stores messages submitted through the public contact form.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | |
+| email | string | Yes | |
+| subject | string | Yes | |
+| message | longText | Yes | |
+| status | string | Yes | New, In Progress, Closed |
+| assigned_to_user_id | bigint | No | FK → users |
+| responded_at | timestamp | No | |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (assigned administrator)
+
+---
+
+# Table: activity_logs
+
+## Purpose
+
+Stores operational events generated throughout the application.
+
+Unlike audit logs, activity logs are intended primarily for system monitoring.
+
+Examples:
+
+- Scheduled job completed
+- Email sent
+- Backup completed
+- Cache cleared
+- Import completed
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| level | string | Yes | info, warning, error |
+| source | string | Yes | Module or service |
+| event | string | Yes | Event name |
+| description | text | No | |
+| metadata | json | No | Additional structured data |
+| created_at | timestamp | Yes | |
+
+---
+
+# Table: announcements
+
+## Purpose
+
+Stores announcements displayed to selected audiences.
+
+Examples:
+
+- Scheduled maintenance
+- New feature releases
+- Awareness campaigns
+- Emergency notifications
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| title | string | Yes | |
+| message | longText | Yes | |
+| audience | string | Yes | Public, Members, Caregivers, Healthcare, Admin |
+| priority | string | Yes | Low, Normal, High, Critical |
+| starts_at | timestamp | No | |
+| ends_at | timestamp | No | |
+| is_active | boolean | Yes | Default true |
+| created_by_user_id | bigint | Yes | FK → users |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (creator)
+
+---
+
+# Table: feature_flags
+
+## Purpose
+
+Allows features to be enabled or disabled without deploying new code.
+
+This table is optional for Version 1.0 but included for future scalability.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| name | string | Yes | Unique feature name |
+| description | text | No | |
+| enabled | boolean | Yes | Default false |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+# Table: maintenance_windows
+
+## Purpose
+
+Defines scheduled maintenance periods.
+
+Future versions may automatically display maintenance banners or disable specific services during these windows.
+
+---
+
+## Planned Columns
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| id | bigint | Yes | Primary Key |
+| title | string | Yes | |
+| description | text | No | |
+| starts_at | timestamp | Yes | |
+| ends_at | timestamp | Yes | |
+| created_by_user_id | bigint | Yes | FK → users |
+| created_at | timestamp | Yes | |
+| updated_at | timestamp | Yes | |
+
+---
+
+## Relationships
+
+- belongsTo User (creator)
+
+---
+
+# Administrative Principles
+
+The Administration Domain follows these principles:
+
+- Every important administrative action should be traceable.
+- Configuration should be stored in the database whenever practical.
+- Operational logs should support troubleshooting.
+- Sensitive administrative actions should also be recorded
+
