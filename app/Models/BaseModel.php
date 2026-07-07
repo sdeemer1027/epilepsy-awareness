@@ -6,7 +6,6 @@
  * File: BaseModel.php
  * Purpose: Base Eloquent model for all ESP application models.
  *
- * @package ESP
  * @since 1.0.0-alpha
  */
 

@@ -6,7 +6,6 @@
  * Migration: CreateProfilesTable
  * Purpose: Stores extended profile information for each user.
  *
- * @package ESP
  * @since 1.0.0-alpha
  */
 
