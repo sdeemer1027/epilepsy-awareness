@@ -1,0 +1,59 @@
+/* ===========================================================
+   Epilepsy Support Platform (ESP)
+
+   File: why.css
+   Purpose: Why Choose ESP section
+
+   Version: 1.0.0
+   =========================================================== */
+
+.esp-why-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+.esp-why-item{
+
+    background:#fff;
+
+    border-left:6px solid var(--esp-primary);
+
+    padding:32px;
+
+    border-radius:16px;
+
+    box-shadow:var(--esp-shadow);
+
+}
+
+.esp-why-item h3{
+
+    margin-bottom:18px;
+
+    color:var(--esp-primary);
+
+}
+
+.esp-why-item p{
+
+    line-height:1.8;
+
+    color:var(--esp-text-light);
+
+}
+
+@media (max-width:992px){
+
+    .esp-why-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+

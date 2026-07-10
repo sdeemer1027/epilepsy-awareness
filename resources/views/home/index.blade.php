@@ -1,35 +1,15 @@
 @extends('layouts.guest')
 
-@section('title','Home')
+@section('title', 'Home')
 
 @section('content')
 
-<section class="container py-5">
+<x-hero />
 
-    <div class="text-center">
+<x-platform-highlights />
 
-        <h1 class="display-4">
+<x-platform-modules />
 
-            Epilepsy Support Platform
-
-        </h1>
-
-        <p class="lead">
-
-            Support. Empower. Together.
-
-        </p>
-
-        <a
-            href="{{ route('register') }}"
-            class="btn btn-primary btn-lg">
-
-            Join Today
-
-        </a>
-
-    </div>
-
-</section>
+<x-why-esp />
 
 @endsection

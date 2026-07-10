@@ -1,0 +1,75 @@
+/* ===========================================================
+   ESP Platform Modules
+   =========================================================== */
+
+.esp-section-light{
+
+    background:#F8F5FC;
+
+}
+
+.esp-modules-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+.esp-module-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:36px;
+
+    box-shadow:var(--esp-shadow);
+
+    transition:.3s;
+
+    text-align:center;
+
+}
+
+.esp-module-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.esp-module-icon{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+.esp-module-card h3{
+
+    color:var(--esp-primary);
+
+    margin-bottom:18px;
+
+}
+
+.esp-module-card p{
+
+    color:var(--esp-text-light);
+
+    line-height:1.8;
+
+}
+
+@media (max-width:992px){
+
+    .esp-modules-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
