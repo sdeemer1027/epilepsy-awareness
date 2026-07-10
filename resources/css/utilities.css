@@ -1,0 +1,52 @@
+/* ===========================================================
+   ESP Utility Classes
+   =========================================================== */
+
+.esp-page {
+
+    width: 90%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+}
+
+.esp-section {
+
+    padding: 5rem 0;
+
+}
+
+.esp-text-center {
+
+    text-align: center;
+
+}
+
+.esp-flex {
+
+    display: flex;
+
+}
+
+.esp-grid {
+
+    display: grid;
+
+}
+
+.esp-hidden {
+
+    display: none;
+
+}
+
+/* Hide Alpine components until initialized */
+
+[x-cloak] {
+
+    display: none !important;
+
+}
+

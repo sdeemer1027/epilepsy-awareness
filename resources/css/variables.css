@@ -1,0 +1,35 @@
+/* ===========================================================
+   ESP Brand Variables
+   =========================================================== */
+
+:root {
+
+    /* Primary */
+
+    --esp-primary: #6F2DBD;
+    --esp-primary-dark: #52218F;
+    --esp-primary-light: #A06AE6;
+
+    /* Background */
+
+    --esp-background: #F8F5FC;
+    --esp-white: #FFFFFF;
+
+    /* Text */
+
+    --esp-text: #2E1A47;
+    --esp-text-light: #6B6282;
+
+    /* Borders */
+
+    --esp-border: #E7E3F1;
+
+    /* Radius */
+
+    --esp-radius: 12px;
+
+    /* Shadow */
+
+    --esp-shadow: 0 8px 25px rgba(0,0,0,.08);
+
+}

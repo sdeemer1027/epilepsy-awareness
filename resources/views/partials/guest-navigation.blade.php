@@ -1,114 +1,202 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex justify-between items-center min-h-[80px]">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                        <!--img
-    src="{{ asset('assets/brand/logo/esp-logo-horizontal.svg') }}"
-    alt="Epilepsy Support Platform"
-    class="h-14 w-auto"-->
+<nav
+    x-data="{ open: false }"
+    class="esp-navbar">
 
-                    </a>
-                </div>
+    <div class="esp-container">
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
-                        {{ __('About') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('features')" :active="request()->routeIs('features')">
-                        {{ __('Features') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('knowledgebase')" :active="request()->routeIs('knowledgebase')">
-                        {{ __('Knowledge Base') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('resources')" :active="request()->routeIs('resources')">
-                        {{ __('Resources') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
-                        {{ __('Contact') }}
-                    </x-nav-link>
-                  
-                 
-                 <a
-                    href="{{ route('login') }}"
-                    class="btn btn-outline-primary">
+        <!-- Logo -->
+        <a href="{{ route('home') }}" class="esp-logo">
+
+            <img
+                src="{{ asset('images/logo/production/logo-horizontal.png') }}"
+                alt="Epilepsy Support Platform">
+
+        </a>
+
+        <!-- Navigation -->
+
+        <ul class="esp-nav-links">
+
+            <li><a href="{{ route('home') }}">Home</a></li>
+
+            <li><a href="{{ route('about') }}">About</a></li>
+
+            <li><a href="{{ route('features') }}">Features</a></li>
+
+            <li><a href="{{ route('knowledgebase') }}">Knowledge Base</a></li>
+
+            <li><a href="#">Forum</a></li>
+
+            <li><a href="#">Q&amp;A</a></li>
+
+            <li><a href="{{ route('resources') }}">Resources</a></li>
+
+            <li><a href="{{ route('contact') }}">Contact</a></li>
+
+        </ul>
+
+        <!-- Authentication -->
+
+        <div class="esp-auth-buttons">
+
+            @guest
+
+                <a href="{{ route('login') }}"
+                   class="esp-btn esp-btn-outline">
+
                     Login
-                 </a>
 
-                 <a
-                    href="{{ route('register') }}"
-                    class="btn btn-primary">
-                    Register
                 </a>
 
-                </div>
-            </div>
+                <a href="{{ route('register') }}"
+                   class="esp-btn esp-btn-primary">
 
-            <!-- Settings Dropdown -->
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-               <a
-                    href="{{ route('login') }}"
-                    class="btn btn-outline-primary">
-                    Login
-                 </a>
-
-                 <a
-                    href="{{ route('register') }}"
-                    class="btn btn-primary">
                     Register
+
                 </a>
+
+            @else
+
+                <a href="{{ route('dashboard') }}"
+                   class="esp-btn esp-btn-primary">
+
+                    Dashboard
+
+                </a>
+
+            @endguest
+
         </div>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                
-            </div>
 
-            <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
-                        {{ __('About') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('features')" :active="request()->routeIs('features')">
-                        {{ __('Features') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('knowledgebase')" :active="request()->routeIs('knowledgebase')">
-                        {{ __('Knowledge Base') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('resources')" :active="request()->routeIs('resources')">
-                        {{ __('Resources') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
-                        {{ __('Contact') }}
-                    </x-responsive-nav-link>
-                
-            </div>
-        </div>
+
+
+
+
+
+
+
+<div class="esp-mobile-toggle">
+
+    <button
+        @click="open = !open"
+        type="button">
+
+        <svg
+            x-show="!open"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24">
+
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+
+        </svg>
+
+        <svg
+            x-show="open"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24">
+
+            <path d="M18 6L6 18M6 6l12 12"/>
+
+        </svg>
+
+    </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+<div
+    x-show="open"
+    x-transition
+    x-cloak
+    class="esp-mobile-menu">
+
+    <a href="{{ route('home') }}">Home</a>
+
+    <a href="{{ route('about') }}">About</a>
+
+    <a href="{{ route('features') }}">Features</a>
+
+    <a href="{{ route('knowledgebase') }}">
+        Knowledge Base
+    </a>
+
+    <a href="{{ route('resources') }}">
+        Resources
+    </a>
+
+    <a href="{{ route('contact') }}">
+        Contact
+    </a>
+
+    @guest
+
+        <a href="{{ route('login') }}">
+            Login
+        </a>
+
+        <a href="{{ route('register') }}">
+            Register
+        </a>
+
+    @else
+
+        <a href="{{ route('dashboard') }}">
+            Dashboard
+        </a>
+
+    @endguest
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </nav>

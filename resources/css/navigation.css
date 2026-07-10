@@ -1,0 +1,211 @@
+/* ===========================================================
+   ESP Navigation
+   Version 1.0
+   =========================================================== */
+
+.esp-navbar {
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: var(--esp-white);
+
+    border-bottom: 1px solid var(--esp-border);
+
+    box-shadow: var(--esp-shadow);
+
+}
+
+.esp-container {
+
+    width: 90%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 90px;
+
+}
+
+/* ---------------- Logo ---------------- */
+
+.esp-logo img {
+
+    display: block;
+
+    height: 64px;
+
+    width: auto;
+
+}
+
+/* ---------------- Navigation ---------------- */
+
+.esp-nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 2rem;
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.esp-nav-links a {
+
+    color: var(--esp-text);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: color .25s ease;
+
+}
+
+.esp-nav-links a:hover {
+
+    color: var(--esp-primary);
+
+}
+
+/* ---------------- Authentication ---------------- */
+
+.esp-auth-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+/* ---------------- Mobile ---------------- */
+
+@media (max-width:992px){
+
+    .esp-nav-links{
+
+        display:none;
+
+    }
+
+}
+
+
+/* ===========================================================
+   ESP Mobile Navigation
+   =========================================================== */
+
+/* Hidden on desktop */
+
+.esp-mobile-toggle {
+
+    display: none;
+
+}
+
+/* Hidden by default */
+/*
+.esp-mobile-menu {
+
+    display: none;
+
+}
+*/
+/* -------------------------
+   Tablet & Mobile
+-------------------------- */
+
+@media (max-width: 992px) {
+
+    /* Hide desktop navigation */
+
+    .esp-nav-links,
+    .esp-auth-buttons {
+
+        display: none;
+
+    }
+
+    /* Show hamburger */
+
+    .esp-mobile-toggle {
+
+        display: flex;
+
+        align-items: center;
+
+    }
+
+    .esp-mobile-toggle button {
+
+        background: transparent;
+
+        border: none;
+
+        cursor: pointer;
+
+        color: var(--esp-primary);
+
+        padding: .5rem;
+
+    }
+
+    /* Mobile menu */
+
+    .esp-mobile-menu {
+
+        display: flex;
+
+        flex-direction: column;
+
+        width: 90%;
+
+        max-width: 1400px;
+
+        margin: 0 auto;
+
+        padding: 1rem 0;
+
+        background: var(--esp-white);
+
+        border-top: 1px solid var(--esp-border);
+
+    }
+
+    .esp-mobile-menu a {
+
+        padding: .9rem 0;
+
+        text-decoration: none;
+
+        color: var(--esp-text);
+
+        font-weight: 600;
+
+        border-bottom: 1px solid var(--esp-border);
+
+    }
+
+    .esp-mobile-menu a:hover {
+
+        color: var(--esp-primary);
+
+    }
+
+}

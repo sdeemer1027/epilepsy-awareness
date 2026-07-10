@@ -23,11 +23,13 @@
 
     @include('partials.guest-navigation')
 
-    <main>
+    <main class="esp-page">
 
-        @yield('content')
+    @yield('content')
 
-    </main>
+    {{ $slot ?? '' }}
+
+</main>
 
     @include('partials.footer')
 
