@@ -15,7 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+/* Public Routes */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::view('/about', 'about.index')->name('about');
+Route::view('/features', 'features.index')->name('features');
+Route::view('/resources', 'resources.index')->name('resources');
+Route::view('/knowledge-base', 'knowledgebase.index')->name('knowledgebase');
+Route::view('/contact', 'contact.index')->name('contact');
+
+/* End Public Routes */
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

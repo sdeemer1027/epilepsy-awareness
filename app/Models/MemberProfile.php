@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-/**
+/****
  * Epilepsy Support Platform (ESP)
  *
- * File: Profile.php
- * Purpose: Stores extended profile information for each registered user.
+ * File: MemberProfile.php
+ * Purpose: Stores extended member profile information for each registered user.
  *
  * @package ESP
  * @since 1.0.0-alpha
+ * @version 1.0
  */
 
 namespace App\Models;

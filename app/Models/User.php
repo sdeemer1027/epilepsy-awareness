@@ -1,4 +1,3 @@
-```php
 <?php
 
 declare(strict_types=1);
@@ -11,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\MemberProfile;
 
 /**
  * Epilepsy Support Platform (ESP)
@@ -25,7 +25,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property string $email
  * @property-read Role|null $role
- * @property-read Profile|null $profile
+ * @property-read MemberProfile|null $memberProfile
+ * @version 1.0
  */
 class User extends Authenticatable
 {
@@ -73,11 +74,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's profile.
+     * Get the member profile associated with the user.
      */
-    public function profile(): HasOne
+    public function memberProfile(): HasOne
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(MemberProfile::class);
     }
 }
-```

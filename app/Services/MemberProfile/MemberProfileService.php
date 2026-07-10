@@ -5,20 +5,20 @@ declare(strict_types=1);
 /**
  * Epilepsy Support Platform (ESP)
  *
- * File: ProfileService.php
- * Purpose: Encapsulates all business logic related to user profiles.
+ * File: MemberProfileService.php
+ * Purpose: Encapsulates all business logic related to member profiles.
  *
  * @package ESP
  * @since 1.0.0-alpha
  * @version 1.0
  */
 
-namespace App\Services\Profile;
+namespace App\Services\MemberProfile;
 
-use App\Models\Profile;
+use App\Models\MemberProfile;
 use App\Models\User;
 
-class ProfileService
+class MemberProfileService
 {
     /**
      * Create a new profile for the given user.
@@ -26,11 +26,11 @@ class ProfileService
      * @param User $user
      * @param array<string, mixed> $data
      */
-    public function create(User $user, array $data): Profile
+    public function create(User $user, array $data): MemberProfile
     {
         $data['user_id'] = $user->id;
 
-        return Profile::create($data);
+        return MemberProfile::create($data);
     }
 
     /**
@@ -39,10 +39,13 @@ class ProfileService
      * @param Profile $profile
      * @param array<string, mixed> $data
      */
-    public function update(Profile $profile, array $data): Profile
+    public function update(
+    MemberProfile $memberProfile,
+    array $data
+): MemberProfile
     {
-        $profile->update($data);
+        $memberProfile->update($data);
 
-        return $profile->fresh();
+        return $memberProfile->fresh();
     }
 }

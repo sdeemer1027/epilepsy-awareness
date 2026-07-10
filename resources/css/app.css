@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+
+    --esp-purple: #6F2DBD;
+
+    --esp-purple-dark: #52218F;
+
+    --esp-purple-light: #A06AE6;
+
+    --esp-background: #F8F5FC;
+
+    --esp-text: #2E1A47;
+
+}
+
+.esp-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:.65rem 1.25rem;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.25s;
+}
+
+.esp-btn-outline{
+
+    border:2px solid var(--esp-purple);
+
+    color:var(--esp-purple);
+
+    background:#fff;
+}
+
+.esp-btn-outline:hover{
+
+    background:var(--esp-purple);
+
+    color:#fff;
+}
+
+.esp-btn-primary{
+
+    background:var(--esp-purple);
+
+    color:#fff;
+
+    border:2px solid var(--esp-purple);
+}
+
+.esp-btn-primary:hover{
+
+    background:var(--esp-purple-dark);
+}
