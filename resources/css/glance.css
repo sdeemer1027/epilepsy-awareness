@@ -1,0 +1,99 @@
+/* ===========================================================
+   Epilepsy Support Platform (ESP)
+
+   File: glance.css
+   Purpose: ESP at a Glance
+
+   Version: 1.0.0
+   =========================================================== */
+
+.esp-glance-section{
+
+    background:#FFFFFF;
+
+}
+
+.esp-glance-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+.esp-stat-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:36px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    box-shadow:var(--esp-shadow);
+
+    transition:all .25s ease;
+
+}
+
+.esp-stat-card:hover{
+
+    transform:translateY(-6px);
+
+    border-bottom:4px solid var(--esp-primary);
+
+}
+
+.esp-stat-icon{
+
+    font-size:2.5rem;
+
+    margin-bottom:16px;
+
+}
+
+.esp-stat-number{
+
+    font-size:2.4rem;
+
+    font-weight:700;
+
+    color:var(--esp-primary);
+
+}
+
+.esp-stat-label{
+
+    margin-top:10px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    color:var(--esp-text);
+
+}
+
+@media (max-width:992px){
+
+    .esp-glance-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
