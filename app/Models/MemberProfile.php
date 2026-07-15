@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int $id
@@ -29,6 +30,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class MemberProfile extends BaseModel
 {
+   use HasFactory;
+   
     protected $table = 'profiles';
 
     protected $fillable = [
