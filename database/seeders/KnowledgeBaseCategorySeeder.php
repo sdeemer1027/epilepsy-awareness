@@ -19,6 +19,20 @@ class KnowledgeBaseCategorySeeder extends Seeder
         $this->seedMedication();
         $this->seedSafety();
         $this->seedLifestyle();
+
+         $this->seedCaregiversAndFamily();
+    $this->seedDrivingAndTransportation();
+    $this->seedEmploymentAndEducation();
+    $this->seedMentalHealthAndWellness();
+    $this->seedPregnancyAndFamilyPlanning();
+    $this->seedLegalAndFinancial();
+    $this->seedTechnologyAndDevices();
+
+    $this->seedResearchAndClinicalTrials();
+    $this->seedCommunityAndSupport();
+    $this->seedHealthcareProfessionals();
+
+
     }
 
     /**
@@ -176,4 +190,211 @@ class KnowledgeBaseCategorySeeder extends Seeder
         $this->createCategory($root->id,'Travel','Traveling with epilepsy.',50);
         $this->createCategory($root->id,'Hobbies','Safe hobbies and recreation.',60);
     }
+
+
+    /*
+|--------------------------------------------------------------------------
+| Caregivers & Family
+|--------------------------------------------------------------------------
+*/
+
+private function seedCaregiversAndFamily(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Caregivers & Family',
+        'Resources for family members and caregivers.',
+        70
+    );
+
+    $this->createCategory($root->id,'Parents','Parents of children with epilepsy.',10);
+    $this->createCategory($root->id,'Spouses & Partners','Support for spouses and partners.',20);
+    $this->createCategory($root->id,'Grandparents','Resources for grandparents.',30);
+    $this->createCategory($root->id,'Siblings','Helping brothers and sisters understand epilepsy.',40);
+    $this->createCategory($root->id,'Friends','Supporting a friend with epilepsy.',50);
+}
+/*
+|--------------------------------------------------------------------------
+| Driving & Transportation
+|--------------------------------------------------------------------------
+*/
+
+private function seedDrivingAndTransportation(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Driving & Transportation',
+        'Driving laws, transportation, and independence.',
+        80
+    );
+
+    $this->createCategory($root->id,'Driver Licensing','Obtaining or restoring driving privileges.',10);
+    $this->createCategory($root->id,'State Driving Laws','Understanding state regulations.',20);
+    $this->createCategory($root->id,'Public Transportation','Using buses, trains, and transit safely.',30);
+    $this->createCategory($root->id,'Ride Share Services','Transportation alternatives.',40);
+    $this->createCategory($root->id,'Commercial Driving','Commercial driver regulations.',50);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Employment & Education
+|--------------------------------------------------------------------------
+*/
+
+private function seedEmploymentAndEducation(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Employment & Education',
+        'Working, learning, and understanding your rights.',
+        90
+    );
+
+    $this->createCategory($root->id,'ADA Rights','Americans with Disabilities Act information.',10);
+    $this->createCategory($root->id,'Workplace Accommodations','Reasonable accommodations at work.',20);
+    $this->createCategory($root->id,'Returning to Work','Returning after diagnosis.',30);
+    $this->createCategory($root->id,'School Plans','504 and IEP information.',40);
+    $this->createCategory($root->id,'College','College accommodations.',50);
+    $this->createCategory($root->id,'Vocational Rehabilitation','Career assistance programs.',60);
+}
+/*
+|--------------------------------------------------------------------------
+| Mental Health & Wellness
+|--------------------------------------------------------------------------
+*/
+
+private function seedMentalHealthAndWellness(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Mental Health & Wellness',
+        'Emotional health and wellness resources.',
+        100
+    );
+
+    $this->createCategory($root->id,'Anxiety','Managing anxiety.',10);
+    $this->createCategory($root->id,'Depression','Understanding depression.',20);
+    $this->createCategory($root->id,'Stress','Managing stress.',30);
+    $this->createCategory($root->id,'Counseling','Professional counseling resources.',40);
+    $this->createCategory($root->id,'Peer Support','Connecting with others.',50);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Pregnancy & Family Planning
+|--------------------------------------------------------------------------
+*/
+
+private function seedPregnancyAndFamilyPlanning(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Pregnancy & Family Planning',
+        'Pregnancy and parenting with epilepsy.',
+        110
+    );
+
+    $this->createCategory($root->id,'Pregnancy','Pregnancy planning.',10);
+    $this->createCategory($root->id,'Parenting','Parenting with epilepsy.',20);
+    $this->createCategory($root->id,'Genetics','Inherited forms of epilepsy.',30);
+    $this->createCategory($root->id,'Family Planning','Planning for the future.',40);
+    $this->createCategory($root->id,'Breastfeeding','Breastfeeding considerations.',50);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Legal & Financial
+|--------------------------------------------------------------------------
+*/
+
+private function seedLegalAndFinancial(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Legal & Financial',
+        'Legal rights and financial assistance.',
+        120
+    );
+
+    $this->createCategory($root->id,'Disability Benefits','Social Security and disability.',10);
+    $this->createCategory($root->id,'Insurance','Health and life insurance.',20);
+    $this->createCategory($root->id,'Financial Assistance','Financial support resources.',30);
+    $this->createCategory($root->id,'Advance Directives','Medical directives.',40);
+    $this->createCategory($root->id,'Employment Rights','Legal protections at work.',50);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Technology & Devices
+|--------------------------------------------------------------------------
+*/
+
+private function seedTechnologyAndDevices(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Technology & Devices',
+        'Technology that supports epilepsy management.',
+        130
+    );
+
+    $this->createCategory($root->id,'Medical ID','Medical identification.',10);
+    $this->createCategory($root->id,'Smart Watches','Wearable technology.',20);
+    $this->createCategory($root->id,'Seizure Detection','Detection devices.',30);
+    $this->createCategory($root->id,'Mobile Apps','Helpful mobile applications.',40);
+    $this->createCategory($root->id,'Wearables','Emerging wearable technology.',50);
+}
+
+private function seedResearchAndClinicalTrials(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Research & Clinical Trials',
+        'Research, studies, and emerging epilepsy treatments.',
+        140
+    );
+
+    $this->createCategory($root->id,'Current Studies','Current epilepsy research.',10);
+    $this->createCategory($root->id,'Clinical Trials','Participating in clinical trials.',20);
+    $this->createCategory($root->id,'Genetics Research','Research into genetic epilepsy.',30);
+    $this->createCategory($root->id,'New Treatments','Emerging therapies and treatments.',40);
+    $this->createCategory($root->id,'Medical Advances','New developments in epilepsy care.',50);
+}
+
+private function seedCommunityAndSupport(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Community & Support',
+        'Connecting people affected by epilepsy.',
+        150
+    );
+
+    $this->createCategory($root->id,'Support Groups','Local and online support groups.',10);
+    $this->createCategory($root->id,'Peer Mentoring','Support from people with lived experience.',20);
+    $this->createCategory($root->id,'Newly Diagnosed Support','Resources for new diagnoses.',30);
+    $this->createCategory($root->id,'Caregiver Stories','Experiences from caregivers.',40);
+    $this->createCategory($root->id,'Member Stories','Community experiences.',50);
+    $this->createCategory($root->id,'Advocacy','Epilepsy awareness and advocacy.',60);
+    $this->createCategory($root->id,'Awareness Events','Events and awareness activities.',70);
+}
+
+private function seedHealthcareProfessionals(): void
+{
+    $root = $this->createCategory(
+        null,
+        'Healthcare Professionals',
+        'Resources for epilepsy healthcare providers.',
+        160
+    );
+
+    $this->createCategory($root->id,'Neurologists','Neurology resources.',10);
+    $this->createCategory($root->id,'Epileptologists','Epilepsy specialists.',20);
+    $this->createCategory($root->id,'Nurses','Nursing resources.',30);
+    $this->createCategory($root->id,'Emergency Responders','EMS and emergency care.',40);
+    $this->createCategory($root->id,'Pharmacists','Medication support resources.',50);
+    $this->createCategory($root->id,'Therapists','Therapy and rehabilitation resources.',60);
+}
+
 }
