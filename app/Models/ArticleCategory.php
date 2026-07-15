@@ -86,18 +86,18 @@ class ArticleCategory extends BaseModel
     /**
      * Active categories only.
      */
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
+  //  public function scopeActive($query)
+  //  {
+  //      return $query->where('is_active', true);
+  //  }
 
     /**
      * Root categories only.
      */
-    public function scopeRoot($query)
-    {
-        return $query->whereNull('parent_id');
-    }
+ //   public function scopeRoot($query)
+ //   {
+ //       return $query->whereNull('parent_id');
+ //   }
 
     /**
  * Returns the full category path.
